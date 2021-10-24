@@ -1,0 +1,31 @@
+# ide
+venv
+.venv
+.idea
+
+# build files
+build
+dist
+*.egg-info
+Utils.egg-info/
+__pycache__
+
+# Mac files
+.DS_Store
+*.swp
+
+# pipenv file
+#Pipfile.lock
+#Pipfile
+
+# stack
+stack
+
+# test data
+repository
+data
+answer
+commitguru_data
+test_data
+_masa_check.py
+temp_*
