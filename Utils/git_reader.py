@@ -25,3 +25,27 @@ def get_all_hash_without_merge(repodir):
             universal_newlines=True
             ).splitlines()
     return hash_list
+
+def get_all_modified_files(repodir, commit_hash):
+    files = subprocess.check_output(
+            ['git', '-C', '{}'.format(repodir), 'diff-tree', '--no-commit-id',
+            '--name-only', '-r', commit_hash,  '--diff-filter=ACMRTUX'],
+            universal_newlines=True
+            ).splitlines()
+    
+    return files
+
+
+def ignore_somecode(text):
+    text = re.sub('\r', '', text)
+    text = re.sub('\f', '', text)
+    text = re.sub('\0', '', text)
+    return text
+
+def git_show_with_context(dirname, commit_hash, context):
+    show = subprocess.check_output(
+            ['git', '-C', '{}'.format(dirname), 'show',
+             '--unified={0}'.format(context), commit_hash],
+            ).decode('utf-8', errors='ignore')
+    show = ignore_somecode(show)
+    return show
